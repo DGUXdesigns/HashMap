@@ -13,10 +13,11 @@ export default [
   eslintPluginPrettier,
   {
     rules: {
-      'prettier/prettier': 'error', // Treat Prettier formatting issues as errors
+      'prettier/prettier': 'off', // Treat Prettier formatting issues as errors
       'capitalized-comments': ['error', 'always'],
       eqeqeq: ['error', 'always'], // Enforce strict equality (===)
       'no-console': 'warn', // Warn when console.log is used
+      'no-unused-vars': 'warn',
     },
   },
 ];

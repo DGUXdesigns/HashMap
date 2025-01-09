@@ -55,4 +55,18 @@ export class HashMap {
 
     return false;
   }
+
+  remove(key) {
+    const bucketIndex = this.hash(key);
+    const bucket = this.buckets[bucketIndex];
+
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i].key === key) {
+        bucket.splice(i, 1);
+        return true;
+      }
+    }
+
+    return false;
+  }
 }

@@ -69,4 +69,14 @@ export class HashMap {
 
     return false;
   }
+
+  length() {
+    let storedKeys = 0;
+
+    for (let i = 0; i < this.buckets.length; i++) {
+      storedKeys += this.buckets[i].length;
+    }
+
+    return storedKeys;
+  }
 }

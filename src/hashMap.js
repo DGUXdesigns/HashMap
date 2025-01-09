@@ -37,9 +37,9 @@ export class HashMap {
     for (let i = 0; i < bucket.length; i++) {
       if (bucket[i].key === key) {
         return bucket[i].value;
-      } else {
-        return null;
       }
     }
+
+    return null;
   }
 }

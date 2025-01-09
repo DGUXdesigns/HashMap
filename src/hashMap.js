@@ -1,7 +1,8 @@
 export class HashMap {
   constructor(capacity, loadFactor) {
-    this.buckets = new Array(capacity).fill().map(() => []);
+    this.capacity = capacity;
     this.loadFactor = loadFactor;
+    this.buckets = new Array(this.capacity).fill().map(() => []);
   }
 
   hash(key) {
@@ -20,6 +21,8 @@ export class HashMap {
     const bucketIndex = this.hash(key);
     const bucket = this.buckets[bucketIndex];
 
+    this.doubleCapacity();
+
     for (let i = 0; i < bucket.length; i++) {
       if (bucket[i].key === key) {
         bucket[i].value = value;
@@ -28,6 +31,23 @@ export class HashMap {
     }
 
     bucket.push({ key, value });
+  }
+
+  doubleCapacity() {
+    if (this.length() + 1 > this.capacity * this.loadFactor) {
+      //Save current data
+      const oldBuckets = this.buckets;
+      this.capacity *= 2;
+      this.buckets = new Array(this.capacity).fill().map(() => []);
+
+      // Rehash and redistribute entries into new buckets
+      oldBuckets.forEach((bucket) => {
+        bucket.forEach((entry) => {
+          const bucketIndex = this.hash(entry.key);
+          this.buckets[bucketIndex].push(entry);
+        });
+      });
+    }
   }
 
   get(key) {

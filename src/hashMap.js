@@ -81,8 +81,6 @@ export class HashMap {
   }
 
   clear() {
-    for (let i = 0; i < this.buckets.length; i++) {
-      this.buckets[i].splice(0, this.buckets[i].length);
-    }
+    this.buckets = new Array(this.buckets.length).fill().map(() => []);
   }
 }
